@@ -4,7 +4,7 @@ from operator import itemgetter
 from typing import Any, Callable, Dict, List, Optional, Tuple
 
 from aiohttp.client_exceptions import ClientConnectorError
-from async_timeout import timeout
+from asyncio import timeout
 from ukhotides import ApiError, InvalidApiKeyError, TidalEvent, UkhoTides
 import voluptuous as vol
 

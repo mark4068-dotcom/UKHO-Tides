@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.2.1 — production cutover
+
+- Use Python's built-in `asyncio.timeout`, removing reliance on the undeclared
+  `async_timeout` package that is absent from a clean Core 2026.11.2 environment.
+- Run compatibility and release checks on Python 3.14 / Core 2026.11.2.
+
 ## 1.2.0 — maintained fork
 
 - Identify the fork as HLM UKHO Tides, with its own source and issue tracker;

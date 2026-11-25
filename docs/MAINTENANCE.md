@@ -34,8 +34,8 @@ Publish that draft only after target-version and live checks pass.
 ## Staged deployment
 
 1. Run the regression suite on the target Home Assistant Python/Core version.
-   The initial local test environment is Core 2026.2.3; production is 2026.11,
-   so local success alone does not establish production compatibility.
+   Automated checks now use Core 2026.11.2 / Python 3.14, matching production's
+   Core release and Python minor version. Live verification is still required.
 2. Back up `/config/custom_components/ukho_tides` and a Home Assistant backup.
    Capture the Cowes entity ID, availability, prediction pairs, next-tide
    attributes and all dependent beach displays before deployment.
@@ -69,7 +69,7 @@ between compatible versions.
 
 ## Development
 
-Use Python 3.13 in an isolated environment:
+Use Python 3.14 in an isolated environment:
 
 ```sh
 python -m pip install -r requirements-dev.txt

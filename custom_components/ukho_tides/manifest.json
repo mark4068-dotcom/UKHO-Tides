@@ -8,5 +8,5 @@
   "dependencies": [],
   "codeowners": ["@mark4068-dotcom"],
   "iot_class": "cloud_polling",
-  "version": "1.2.0"
+  "version": "1.2.1"
 }

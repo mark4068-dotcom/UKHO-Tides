@@ -5,7 +5,7 @@ from typing import Any, Dict
 
 from aiohttp import ClientError
 from aiohttp.client_exceptions import ClientConnectorError
-from async_timeout import timeout
+from asyncio import timeout
 from ukhotides import ApiError, ApiLevel, InvalidApiKeyError, Station, UkhoTides
 import voluptuous as vol
 
