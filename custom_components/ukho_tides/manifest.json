@@ -1,8 +1,9 @@
 {
   "domain": "ukho_tides",
-  "name": "UKHO Tides",
+  "name": "HLM UKHO Tides",
   "config_flow": true,
-  "documentation": "https://github.com/ianByrne/HASS_Integration_UKHOTides",
+  "documentation": "https://github.com/mark4068-dotcom/UKHO-Tides",
+  "issue_tracker": "https://github.com/mark4068-dotcom/UKHO-Tides/issues",
   "requirements": ["ukhotides==1.1.2"],
   "dependencies": [],
   "codeowners": ["@mark4068-dotcom"],

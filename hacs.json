@@ -1,5 +1,4 @@
 {
-  "name": "UKHO Tides",
-  "render_readme": true,
-  "iot_class": "Cloud Polling"
+  "name": "HLM UKHO Tides",
+  "render_readme": true
 }

@@ -1,11 +1,32 @@
-# UKHO Tides
+# HLM UKHO Tides
 
 This is Mark's maintained compatibility fork of Ian Byrne's UKHO integration,
 based on upstream version 1.1.2. It retains the UKHO feed and existing sensor
 identities. See [the changelog](CHANGELOG.md) and
 [maintenance, deployment and upstream return plan](docs/MAINTENANCE.md).
-The original documentation follows below. Its HACS instructions refer to the
-original project; this fork has not yet been published or deployed.
+Our source repository is [mark4068-dotcom/UKHO-Tides](https://github.com/mark4068-dotcom/UKHO-Tides).
+The display name distinguishes it from the original. The internal domain stays
+`ukho_tides`, preserving existing configuration and sensors. This is a maintained
+community integration using UKHO data, not an official UKHO integration.
+
+## Installing and releasing this fork
+
+Use our repository URL as a HACS custom repository of category **Integration**.
+For an existing installation, follow the [staged migration instructions](docs/MAINTENANCE.md)
+before changing its update source. Both projects use the same domain and should
+not be installed together. Live deployment is a separate step.
+
+Push changes to `main` or open a pull request to run the compatibility checks.
+To prepare a release, update the manifest version and changelog, then run the
+**Prepare release** workflow from GitHub Actions. It reruns tests, creates a tag
+from that exact commit, and prepares a draft release with an installation ZIP.
+Review and publish the draft after the target HA version and live checks pass.
+
+## Original project documentation
+
+The documentation below is retained from Ian Byrne's original project, including
+its screenshots and examples. For this fork, use our repository URL and search
+for **HLM UKHO Tides** in Home Assistant.
 
 A [Home Assistant (HASS)](https://www.home-assistant.io/) integration to show tide information for stations provided by the [UK Hydrographic Office (UKHO)](https://www.admiralty.co.uk/ukho/About-Us).
 

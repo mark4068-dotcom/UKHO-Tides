@@ -1,5 +1,5 @@
 DOMAIN: str = "ukho_tides"
-DEFAULT_NAME: str = "UKHO Tides"
+DEFAULT_NAME: str = "HLM UKHO Tides"
 
 CONF_API_LEVEL: str = "api_level"
 CONF_STATION_ID: str = "station_id"

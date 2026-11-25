@@ -2,6 +2,9 @@
 
 ## 1.2.0 — maintained fork
 
+- Identify the fork as HLM UKHO Tides, with its own source and issue tracker;
+  retain `ukho_tides` internally for migration compatibility.
+- Add automated tests and a manual workflow to prepare tested draft releases.
 - Remove deprecated config-flow connection class; declare cloud polling in the manifest.
 - Use the current HA-managed options-flow config entry instead of assigning its read-only property.
 - Keep options edits separate from running configuration and return a form on station-download failure.
