@@ -33,6 +33,9 @@ Publish that draft only after target-version and live checks pass.
 
 ## Staged deployment
 
+The initial production cutover to v1.2.1 is recorded in the
+[2026-11-25 deployment report](session-reports/2026-11-25-production-cutover.md).
+
 1. Run the regression suite on the target Home Assistant Python/Core version.
    Automated checks now use Core 2026.11.2 / Python 3.14, matching production's
    Core release and Python minor version. Live verification is still required.
@@ -42,9 +45,18 @@ Publish that draft only after target-version and live checks pass.
 3. Settle the update source before installing: an update from the original HACS
    repository can overwrite a manually installed fork. Use one repository for
    this domain, and retain the upstream remote for comparison.
-4. Replace only integration files. Keep the existing integration entry and
-   station configuration; do not remove/recreate the integration or edit its
-   storage records. Restart Core in a maintenance window.
+4. When updating this fork, keep the existing integration entry and install the
+   desired release through Marketplace, then restart Core. When switching from
+   another repository on Core 2026.11, Marketplace refuses to uninstall source
+   files while their integration entry exists and refuses a second repository
+   owning the same domain. Do not bypass those guards or edit storage records.
+   Obtain confirmation for a configuration backup and entry removal, save the
+   account/station settings privately, remove the old entry through the API,
+   uninstall the old repository and install this fork. Restart Core and recreate
+   the entry through its config flow with the saved settings. Verify the sensor
+   entity IDs, unique IDs, registry overrides and exposure settings; the config
+   entry ID changes. This extra step is only for the source switch, not ordinary
+   releases of this fork.
 5. Verify startup without the deprecated connection-class warning, open the
    options flow without saving, and confirm Cowes identity and predictions.
    Check all seven beach cards across HLM, Topgallant, Home Kiosk and the welcome
