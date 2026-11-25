@@ -5,10 +5,19 @@ This fork starts from Ian Byrne's MIT-licensed integration, upstream commit
 The `upstream` Git remote tracks the original repository. No UKHO service or
 prediction algorithm is replaced.
 
-The owner has reported the compatibility problem upstream. Keep that issue as
-the place to track an upstream response; its URL has not yet been recorded here.
+The owner has reported the compatibility problem in
+[upstream issue #43](https://github.com/ianByrne/HASS-ukho_tides/issues/43).
+Keep that issue as the place to track an upstream response.
 The existing upstream compatibility monitor should remain active. An upstream
 patch is a candidate for review, not a trigger for automatic installation.
+
+Our maintained source is [mark4068-dotcom/UKHO-Tides](https://github.com/mark4068-dotcom/UKHO-Tides),
+with `main` as the default branch and **HLM UKHO Tides** as the display name.
+The local checkout is `/Users/mark/Documents/GitHub/UKHO-Tides`.
+Its `origin` remote points to our repository and `upstream` to Ian Byrne's.
+Push compatibility checks run on GitHub Actions; the manual **Prepare release**
+workflow builds an installation ZIP and creates a draft release after tests.
+Publish that draft only after target-version and live checks pass.
 
 ## Compatibility contract
 
@@ -68,5 +77,5 @@ python -m pytest -q
 ```
 
 Tests use synthetic events and a mocked API; they need no credentials or UKHO
-requests. Add the upstream issue URL here when available. Do not store API keys,
+requests. Do not store API keys,
 Home Assistant backups or live config-entry exports in this repository.
