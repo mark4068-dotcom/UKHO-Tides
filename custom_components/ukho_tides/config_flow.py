@@ -32,7 +32,6 @@ _LOGGER = logging.getLogger(__name__)
 
 class ConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
     VERSION = 1
-    CONNECTION_CLASS = config_entries.CONN_CLASS_CLOUD_POLL
 
     async def async_step_user(self, user_input=None):
         errors = {}
@@ -168,20 +167,22 @@ class ConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
     @staticmethod
     @callback
     def async_get_options_flow(config_entry):
-        return OptionsFlowHandler(config_entry)
+        return OptionsFlowHandler()
 
 
 class OptionsFlowHandler(config_entries.OptionsFlow):
-    def __init__(self, config_entry: config_entries.ConfigEntry) -> None:
-        self.config_entry = config_entry
-
     async def async_step_init(
         self, user_input: Dict[str, Any] = None
     ) -> Dict[str, Any]:
         errors: Dict[str, str] = {}
 
         session = async_get_clientsession(self.hass)
-        self.data = self.hass.data[DOMAIN][self.config_entry.entry_id]
+        self.data = deepcopy({**self.config_entry.data, **self.config_entry.options})
+        all_stations = {}
+        registered_stations_unique_to_entity = {
+            station[CONF_STATION_ID]: station[CONF_STATION_ID]
+            for station in self.data.get(CONF_STATIONS, [])
+        }
 
         try:
             async with timeout(10):

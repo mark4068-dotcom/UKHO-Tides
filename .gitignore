@@ -138,3 +138,7 @@ dmypy.json
 cython_debug/
 
 .vscode/
+.test-deps/
+.venv/
+__pycache__/
+.pytest_cache/

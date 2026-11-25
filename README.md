@@ -1,5 +1,12 @@
 # UKHO Tides
 
+This is Mark's maintained compatibility fork of Ian Byrne's UKHO integration,
+based on upstream version 1.1.2. It retains the UKHO feed and existing sensor
+identities. See [the changelog](CHANGELOG.md) and
+[maintenance, deployment and upstream return plan](docs/MAINTENANCE.md).
+The original documentation follows below. Its HACS instructions refer to the
+original project; this fork has not yet been published or deployed.
+
 A [Home Assistant (HASS)](https://www.home-assistant.io/) integration to show tide information for stations provided by the [UK Hydrographic Office (UKHO)](https://www.admiralty.co.uk/ukho/About-Us).
 
 It provides an entity for each station that you follow, showing whether the tide is currently rising or falling, and how long until the next high and low tides.

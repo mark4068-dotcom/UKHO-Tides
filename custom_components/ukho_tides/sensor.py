@@ -126,12 +126,18 @@ class UkhoTidesSensor(CoordinatorEntity):
         return self.coordinator.station[CONF_STATION_ID]
 
     @property
+    def available(self):
+        return super().available and bool(self.get_next_predictions())
+
+    @property
     def state(self):
         if self.coordinator.data is None:
             return None
 
         next_predictions = self.get_next_predictions()
 
+        if not next_predictions:
+            return None
         if next_predictions[0]["tidal_event"].event_type == "HighWater":
             return "Rising"
         else:
@@ -144,6 +150,8 @@ class UkhoTidesSensor(CoordinatorEntity):
 
         next_predictions = self.get_next_predictions()
 
+        if not next_predictions:
+            return None
         if next_predictions[0]["tidal_event"].event_type == "HighWater":
             return ATTR_ICON_RISING
         else:
@@ -153,11 +161,10 @@ class UkhoTidesSensor(CoordinatorEntity):
     def extra_state_attributes(self):
         next_predictions = self.get_next_predictions()
 
-        if next_predictions is None:
-            return None
-
+        # Rebuild attributes so expired extrema cannot survive a shorter response.
+        self._attrs = {ATTR_ATTRIBUTION: ATTRIBUTION}
         self._attrs[f"predictions"] = []
-        for p in self.coordinator.data:
+        for p in self.coordinator.data or []:
             self._attrs[f"predictions"].append(
                 [
                     p["tidal_event_datetime"].strftime("%Y-%m-%d %H:%M:%S"),
@@ -165,7 +172,7 @@ class UkhoTidesSensor(CoordinatorEntity):
                 ]
             )
 
-        now = datetime.utcnow().replace(tzinfo=timezone.utc)
+        now = datetime.now(timezone.utc)
 
         for event_type in ['HighWater', 'LowWater']:
             next_event = next((p for p in next_predictions if p["tidal_event"].event_type == event_type), None)
@@ -176,7 +183,7 @@ class UkhoTidesSensor(CoordinatorEntity):
             time_to_next_tide = next_event["tidal_event_datetime"] - now
             next_height = round(next_event["tidal_event"].height, 1)
 
-            hours, rem = divmod(time_to_next_tide.seconds, 3600)
+            hours, rem = divmod(int(time_to_next_tide.total_seconds()), 3600)
             minutes, seconds = divmod(rem, 60)
 
             if next_event["tidal_event"].event_type == "HighWater":
@@ -195,10 +202,10 @@ class UkhoTidesSensor(CoordinatorEntity):
         return self._attrs
 
     def get_next_predictions(self) -> [{datetime, TidalEvent}]:
-        now = datetime.utcnow().replace(tzinfo=timezone.utc)
+        now = datetime.now(timezone.utc)
         next_predictions = []
 
-        for tidal_event in self.coordinator.data:
+        for tidal_event in self.coordinator.data or []:
             if tidal_event["tidal_event_datetime"] > now:
                 next_predictions.append(tidal_event)
 
@@ -218,7 +225,7 @@ class UkhoTidesDataUpdateCoordinator(DataUpdateCoordinator):
         super().__init__(hass, _LOGGER, name=DOMAIN, update_interval=update_interval)
 
     async def _async_update_data(self) -> List[TidalEvent]:
-        now = datetime.utcnow().replace(tzinfo=timezone.utc)
+        now = datetime.now(timezone.utc)
 
         # As predictions rarely change, only refresh from the API infrequently
         if (
