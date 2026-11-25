@@ -56,6 +56,10 @@ name, area, labels, aliases, enabled state and voice exposure match the baseline
 - Version 1.2.1 was published after live validation, then installed by tag so
   Marketplace follows releases rather than the main branch. Marketplace required
   a final restart after this tag install, despite identical integration files.
+- After that final restart, Cowes remains available with 39 predictions,
+  `update.hlm_ukho_tides` reports installed/latest `v1.2.1`, the restart repair
+  is gone, and the log contains only the expected unplugged voice warning.
+  All 20 dashboard-reference matches retain their original configuration hashes.
 
 Separate observation: Home Kiosk's overview contains two missing EV/car entity
 tiles unrelated to tides; those were left unchanged. Longer-term observations
